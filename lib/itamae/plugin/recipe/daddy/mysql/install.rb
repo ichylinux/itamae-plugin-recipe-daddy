@@ -1,6 +1,6 @@
 require 'daddy/itamae'
 
-case Daddy.os_version
+case os_version
 when /rhel-6\.(.*?)/
   package 'mysql' do
     user 'root'
@@ -44,7 +44,7 @@ when /rhel-7\.(.*?)/
   end
 
 else
-  raise I18n.t('itamae.errors.unsupported_os_version', :os_version => os_version)
+  raise I18n.t('itamae.errors.unsupported_os_version', os_version: os_version)
 end
 
 package 'expect' do
