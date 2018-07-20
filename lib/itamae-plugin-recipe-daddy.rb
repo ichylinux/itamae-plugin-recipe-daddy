@@ -1,0 +1,1 @@
+require 'itamae_plugin_recipe_daddy/daddy'
