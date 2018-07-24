@@ -37,7 +37,15 @@ http {
   server {
     listen 80 default_server;
     server_name _;
-    deny all;
+
+    location ^~ /.well-known/acme-challenge/ {
+      default_type "text/plain";
+      root /opt/nginx/shared/letsencrypt;
+    }
+
+    location / {
+      deny all;
+    }
   }
 
   include /etc/nginx/conf.d/servers/*.conf;

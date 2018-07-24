@@ -9,6 +9,7 @@ directory 'tmp'
   /opt/nginx
   /opt/nginx/cache
   /opt/nginx/shared
+  /opt/nginx/shared/letsencrypt
   /opt/nginx/shared/logs
 }.each do |name|
   directory name do
