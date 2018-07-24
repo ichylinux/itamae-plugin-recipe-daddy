@@ -7,7 +7,6 @@ directory 'tmp'
 # install destination
 %w{
   /opt/nginx
-  /opt/nginx/cache
   /opt/nginx/shared
   /opt/nginx/shared/letsencrypt
   /opt/nginx/shared/logs
@@ -15,6 +14,17 @@ directory 'tmp'
   directory name do
     user 'root'
     owner 'root'
+    group 'root'
+    mode '755'
+  end
+end
+
+%w{
+  /opt/nginx/cache
+}.each do |name|
+  directory name do
+    user 'root'
+    owner 'nobody'
     group 'root'
     mode '755'
   end
