@@ -128,7 +128,7 @@ end
 
 execute 'systemctl daemon-reload' do
   user 'root'
-  subscribes :run, 'template[/lib/systemd/system/nginx.service]'
+  subscribes :run, 'template[/lib/systemd/system/nginx.service]', timing: :immediately
   action :nothing
 end
 
