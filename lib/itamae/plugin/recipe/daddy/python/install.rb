@@ -5,7 +5,8 @@ version = ENV['PYTHON_VERSION'] || ItamaePluginRecipeDaddy::PYTHON_VERSION
 execute "download python-#{version}" do
   cwd '/var/daddy/tmp'
   command <<-EOF
-    curl -O https://www.python.org/ftp/python/#{version}/Python-#{version}.tar.xz
+    rm -f Python-#{version}.tar.xz
+    wget https://www.python.org/ftp/python/#{version}/Python-#{version}.tar.xz
   EOF
   not_if "sha256sum -c #{::File.join(::File.dirname(__FILE__), "Python-#{version}_sha256sum.txt")}"
 end
@@ -21,5 +22,5 @@ execute "install python-#{version}" do
       sudo make install
     popd
   EOF
-  only_if "which python3 && python3 -V | grep 'Python #{version}'" 
+  not_if "which python3 && python3 -V | grep 'Python #{version}'" 
 end
