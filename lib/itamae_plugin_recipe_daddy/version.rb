@@ -29,4 +29,10 @@ module ItamaePluginRecipeDaddy
     PASSENGER_VERSION_MINOR = '3',
     PASSENGER_VERSION_REVISION = '3'
   ].join('.')
+
+  PYTHON_VERSION = [
+    PYTHON_VERSION_MAJOR = '3',
+    PYTHON_VERSION_MINOR = '6',
+    PYTHON_VERSION_REVISION = '6'
+  ].join('.')
 end
