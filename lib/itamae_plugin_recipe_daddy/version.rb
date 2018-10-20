@@ -24,6 +24,12 @@ module ItamaePluginRecipeDaddy
     NGINX_RTMP_MODULE_VERSION_REVISION = '1'
   ].join('.')
   
+  OPENCV_VERSION = [
+    OPENCV_VERSION_MAJOR = '3',
+    OPENCV_VERSION_MINOR = '3',
+    OPENCV_VERSION_REVISION = '1'
+  ].join('.')
+
   PASSENGER_VERSION = [
     PASSENGER_VERSION_MAJOR = '5',
     PASSENGER_VERSION_MINOR = '3',
