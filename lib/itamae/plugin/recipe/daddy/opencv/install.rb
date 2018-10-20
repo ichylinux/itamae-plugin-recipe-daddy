@@ -2,6 +2,10 @@ require 'daddy/itamae'
 
 version = ENV['OPENCV_VERSION'] || ItamaePluginRecipeDaddy::OPENCV_VERSION
 
+package 'gtk3-devel' do
+  user 'root'
+end
+
 execute "download opencv-#{version}" do
   cwd '/var/daddy/tmp'
   command <<-EOF
@@ -20,10 +24,10 @@ execute "install opencv-#{version}" do
       mkdir build
       pushd build
         cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local ..
-        make -j7
+        make -j7 # doesn't work as expected thread count
         sudo make install
       popd
     popd
   EOF
-  not_if "which opencv_version && opencv_version | grep '#{version}'" 
+  not_if "which opencv_version && opencv_version | grep '#{version}'" unless ENV['FORCE']
 end
