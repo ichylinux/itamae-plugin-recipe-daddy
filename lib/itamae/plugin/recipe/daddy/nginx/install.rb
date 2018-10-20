@@ -118,8 +118,10 @@ directory '/etc/nginx/conf.d/servers' do
   mode '755'
 end
 
-if Daddy.config.app.type?
-  include_recipe File.join(File.dirname(File.dirname(__FILE__)), Daddy.config.app.type, 'install.rb')
+if Daddy.config.app?
+  if Daddy.config.app.type?
+    include_recipe File.join(File.dirname(File.dirname(__FILE__)), Daddy.config.app.type, 'install.rb')
+  end
 end
 
 template '/lib/systemd/system/nginx.service' do
