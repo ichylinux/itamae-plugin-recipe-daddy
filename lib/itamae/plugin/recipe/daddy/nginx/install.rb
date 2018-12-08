@@ -32,7 +32,7 @@ end
 
 # nginx source
 execute 'download nginx' do
-  cwd 'tmp'
+  cwd '/var/daddy/tmp'
   command <<-EOF
     wget https://nginx.org/download/nginx-#{version}.tar.gz
   EOF
@@ -45,7 +45,7 @@ include_recipe 'modules/passenger'
 
 # build
 execute 'build nginx' do
-  cwd 'tmp'
+  cwd '/var/daddy/tmp'
   command <<-EOF
     rm -Rf nginx-#{version}/
     tar zxf nginx-#{version}.tar.gz
@@ -99,8 +99,8 @@ when /rhel-7\.(.*?)/
     owner 'root'
     group 'root'
     mode '644'
-    variables :path => '/var/run/passenger-instreg',
-        :owner => 'root', :group => 'root', :mode => '0755'
+    variables path: '/var/run/passenger-instreg',
+        owner: 'root', group: 'root', mode: '0755'
     end
 end
 
