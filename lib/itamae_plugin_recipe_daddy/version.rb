@@ -1,5 +1,5 @@
 module ItamaePluginRecipeDaddy
-  VERSION = '0.1.5'
+  VERSION = '0.1.6'
 
   CHROME_DRIVER_VERSION = [
     CHROME_DRIVER_VERSION_MAJOR = '2',
