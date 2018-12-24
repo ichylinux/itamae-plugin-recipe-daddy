@@ -10,7 +10,7 @@ execute "download chromedriver-#{version}" do
 end
 
 execute "install chromedriver-#{version}" do
-  cwd 'tmp'
+  cwd '/var/daddy/tmp'
   command <<-EOF
     unzip chromedriver_linux64-#{version}.zip
     sudo mv -f chromedriver /usr/local/bin/
