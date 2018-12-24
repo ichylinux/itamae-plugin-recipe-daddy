@@ -1,11 +1,7 @@
-require 'daddy'
-
-directory 'tmp'
-
 version = ENV['CHROME_DRIVER_VERSION'] || ItamaePluginRecipeDaddy::CHROME_DRIVER_VERSION
 
 execute "download chromedriver-#{version}" do
-  cwd 'tmp'
+  cwd '/var/daddy/tmp'
   command <<-EOF
     curl -o chromedriver_linux64-#{version}.zip \
         https://chromedriver.storage.googleapis.com/#{version}/chromedriver_linux64.zip
