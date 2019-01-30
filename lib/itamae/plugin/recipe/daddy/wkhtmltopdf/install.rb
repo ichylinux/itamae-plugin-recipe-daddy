@@ -19,6 +19,7 @@ when /rhel-6\.(.*?)/
     command <<-EOF
       yum install -y wkhtmltox-#{version}.centos6.x86_64.rpm
     EOF
+    not_if "yum info wkhtmltox | grep Version | grep #{version}"
   end
 when /rhel-7\.(.*?)/
   execute "download wkhtmltox-#{version}" do
@@ -36,5 +37,6 @@ when /rhel-7\.(.*?)/
     command <<-EOF
       yum install -y wkhtmltox-#{version}.centos7.x86_64.rpm
     EOF
+    not_if "yum info wkhtmltox | grep Version | grep #{version.split('-').first}"
   end
 end
