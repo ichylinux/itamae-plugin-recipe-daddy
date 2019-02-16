@@ -4,6 +4,7 @@ nginx_version = ENV['NGINX_VERSION'] || ItamaePluginRecipeDaddy::NGINX_VERSION
 gem_package 'passenger' do
   user 'root'
   version version
+  options ['--verbose'] # to avoid read timeout error on docker
 end
 
 execute "rm -Rf /opt/nginx/nginx-#{nginx_version}" do

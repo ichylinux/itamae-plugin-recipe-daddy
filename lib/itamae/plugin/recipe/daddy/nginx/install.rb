@@ -1,6 +1,7 @@
 require 'daddy/itamae'
 
 version = ENV['NGINX_VERSION'] || ItamaePluginRecipeDaddy::NGINX_VERSION
+rtmp_version = ENV['NGINX_RTMP_MODULE_VERSION'] || ItamaePluginRecipeDaddy::NGINX_RTMP_MODULE_VERSION
 
 # install destination
 %w{
@@ -45,6 +46,7 @@ include_recipe 'modules/passenger'
 execute 'build nginx' do
   cwd '/var/daddy/tmp'
   command <<-EOF
+    set -eu
     rm -Rf nginx-#{version}/
     tar zxf nginx-#{version}.tar.gz
     pushd nginx-#{version}
@@ -53,7 +55,7 @@ execute 'build nginx' do
         --conf-path=/etc/nginx/nginx.conf \
         --pid-path=/run/nginx.pid \
         --with-http_ssl_module \
-        --add-dynamic-module=/opt/nginx-rtmp-module/v1.1.11 \
+        --add-dynamic-module=/opt/nginx-rtmp-module/v#{rtmp_version} \
         --add-dynamic-module=$(passenger-config --nginx-addon-dir)
       sudo chown -R #{ENV['USER']}:#{ENV['USER']} ./
       make
@@ -89,17 +91,13 @@ end
   end
 end
 
-case os_version
-when /rhel-6\.(.*?)/
-when /rhel-7\.(.*?)/
-  template '/etc/tmpfiles.d/passenger.conf' do
-    user 'root'
-    owner 'root'
-    group 'root'
-    mode '644'
-    variables path: '/var/run/passenger-instreg',
-        owner: 'root', group: 'root', mode: '0755'
-    end
+template '/etc/tmpfiles.d/passenger.conf' do
+  user 'root'
+  owner 'root'
+  group 'root'
+  mode '644'
+  variables path: '/var/run/passenger-instreg',
+      owner: 'root', group: 'root', mode: '0755'
 end
 
 template '/etc/nginx/conf.d/default.conf' do
@@ -122,17 +120,14 @@ if Daddy.config.app?
   end
 end
 
-template '/lib/systemd/system/nginx.service' do
-  user 'root'
-end
-
-execute 'systemctl daemon-reload' do
-  user 'root'
-  subscribes :run, 'template[/lib/systemd/system/nginx.service]', :immediately
-  action :nothing
-end
-
-service 'nginx' do
-  user 'root'
-  action :enable
+unless ENV['DOCKER']
+  template '/lib/systemd/system/nginx.service' do
+    user 'root'
+  end
+  
+  execute 'systemctl daemon-reload' do
+    user 'root'
+    subscribes :run, 'template[/lib/systemd/system/nginx.service]', :immediately
+    action :nothing
+  end
 end
