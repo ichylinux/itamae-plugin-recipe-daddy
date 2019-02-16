@@ -2,8 +2,6 @@ require 'daddy/itamae'
 
 version = ENV['NGINX_VERSION'] || ItamaePluginRecipeDaddy::NGINX_VERSION
 
-directory 'tmp'
-
 # install destination
 %w{
   /opt/nginx
@@ -31,12 +29,12 @@ end
 end
 
 # nginx source
-execute 'download nginx' do
+execute "download nginx-#{version}" do
   cwd '/var/daddy/tmp'
   command <<-EOF
     wget https://nginx.org/download/nginx-#{version}.tar.gz
   EOF
-  not_if "sha256sum -c #{::File.join(::File.dirname(__FILE__), "nginx-#{version}_sha256sum.txt")}"
+  not_if "echo #{::File.read(::File.join(::File.dirname(__FILE__), "nginx-#{version}_sha256sum.txt")).strip} | sha256sum -c"
 end
 
 # module sources
