@@ -15,14 +15,14 @@ GEM
       schash (~> 0.1.0)
       specinfra (>= 2.64.0, < 3.0.0)
       thor
-    net-scp (1.2.1)
-      net-ssh (>= 2.6.5)
-    net-ssh (5.1.0)
+    net-scp (2.0.0)
+      net-ssh (>= 2.6.5, < 6.0.0)
+    net-ssh (5.2.0)
     net-telnet (0.1.1)
     rake (12.3.2)
     schash (0.1.2)
     sfl (2.3)
-    specinfra (2.76.9)
+    specinfra (2.77.0)
       net-scp
       net-ssh (>= 2.7)
       net-telnet (= 0.1.1)

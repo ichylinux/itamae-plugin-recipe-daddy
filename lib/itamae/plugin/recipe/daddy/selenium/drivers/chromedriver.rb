@@ -6,7 +6,7 @@ execute "download chromedriver-#{version}" do
     curl -o chromedriver_linux64-#{version}.zip \
         https://chromedriver.storage.googleapis.com/#{version}/chromedriver_linux64.zip
   EOF
-  not_if "sha256sum -c #{::File.join(::File.dirname(__FILE__), "chromedriver_linux64-#{version}_sha256sum.txt")}"
+  not_if "echo #{::File.read(::File.join(::File.dirname(__FILE__), "chromedriver_linux64-#{version}_sha256sum.txt")).strip} | sha256sum -c"
 end
 
 execute "install chromedriver-#{version}" do
