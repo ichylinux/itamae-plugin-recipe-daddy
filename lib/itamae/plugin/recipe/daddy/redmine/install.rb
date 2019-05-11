@@ -1,4 +1,7 @@
 %w{
+  ImageMagick
+  ImageMagick-devel
+  ipa-pgothic-fonts
   libcurl-devel
   libffi-devel  
   libyaml-devel
