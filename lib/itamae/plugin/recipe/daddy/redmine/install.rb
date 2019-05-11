@@ -1,5 +1,5 @@
 %w{
-  curl-devel
+  libcurl-devel
   libffi-devel  
   libyaml-devel
   openssl-devel
