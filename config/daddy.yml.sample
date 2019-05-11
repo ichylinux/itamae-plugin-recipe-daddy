@@ -1,0 +1,13 @@
+# name of your application
+application: my_app
+
+# web layer settings
+web:
+  # server name exposed to public interface
+  # this is usually a domain name of your app.
+  server_name: localhost
+
+# app layer settings
+app:
+  # type of application server which is behind nginx
+  type: passenger

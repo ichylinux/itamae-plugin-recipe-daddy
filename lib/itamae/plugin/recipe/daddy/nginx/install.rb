@@ -60,9 +60,10 @@ execute 'build nginx' do
       sudo chown -R #{ENV['USER']}:#{ENV['USER']} ./
       make
       sudo make install
+      sudo touch /opt/nginx/nginx-#{version}/INSTALLED
     popd
   EOF
-  not_if "test -e /opt/nginx/nginx-#{version}"
+  not_if "test -e /opt/nginx/nginx-#{version}/INSTALLED"
 end
 
 link 'current' do

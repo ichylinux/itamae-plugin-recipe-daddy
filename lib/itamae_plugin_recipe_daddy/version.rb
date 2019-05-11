@@ -15,8 +15,8 @@ module ItamaePluginRecipeDaddy
 
   NGINX_VERSION = [
     NGINX_VERSION_MAJOR = '1',
-    NGINX_VERSION_MINOR = '14',
-    NGINX_VERSION_PATCH = '2'
+    NGINX_VERSION_MINOR = '16',
+    NGINX_VERSION_PATCH = '0'
   ].join('.')
   
   NGINX_RTMP_MODULE_VERSION = [
@@ -34,7 +34,7 @@ module ItamaePluginRecipeDaddy
   PASSENGER_VERSION = [
     PASSENGER_VERSION_MAJOR = '6',
     PASSENGER_VERSION_MINOR = '0',
-    PASSENGER_VERSION_PATCH = '1'
+    PASSENGER_VERSION_PATCH = '2'
   ].join('.')
 
   PYTHON_VERSION = [

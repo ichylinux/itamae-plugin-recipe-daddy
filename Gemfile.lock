@@ -3,18 +3,21 @@ PATH
   specs:
     itamae-plugin-recipe-daddy (0.1.12)
       itamae (~> 1.10, >= 1.10.2)
+      itamae-plugin-resource-firewalld
 
 GEM
   remote: https://rubygems.org/
   specs:
     ansi (1.5.0)
     hashie (3.6.0)
-    itamae (1.10.3)
+    itamae (1.10.4)
       ansi
       hashie
       schash (~> 0.1.0)
       specinfra (>= 2.64.0, < 3.0.0)
       thor
+    itamae-plugin-resource-firewalld (0.0.2)
+      itamae
     net-scp (2.0.0)
       net-ssh (>= 2.6.5, < 6.0.0)
     net-ssh (5.2.0)
@@ -22,7 +25,7 @@ GEM
     rake (12.3.2)
     schash (0.1.2)
     sfl (2.3)
-    specinfra (2.77.0)
+    specinfra (2.77.1)
       net-scp
       net-ssh (>= 2.7)
       net-telnet (= 0.1.1)
@@ -33,9 +36,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.16)
+  bundler (~> 2.0)
   itamae-plugin-recipe-daddy!
-  rake (~> 12.0)
+  rake (~> 12.3)
 
 BUNDLED WITH
-   1.17.3
+   2.0.1
