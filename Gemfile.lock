@@ -3,7 +3,6 @@ PATH
   specs:
     itamae-plugin-recipe-daddy (0.1.12)
       itamae (~> 1.10, >= 1.10.2)
-      itamae-plugin-resource-firewalld
 
 GEM
   remote: https://rubygems.org/
@@ -16,8 +15,6 @@ GEM
       schash (~> 0.1.0)
       specinfra (>= 2.64.0, < 3.0.0)
       thor
-    itamae-plugin-resource-firewalld (0.0.2)
-      itamae
     net-scp (2.0.0)
       net-ssh (>= 2.6.5, < 6.0.0)
     net-ssh (5.2.0)
