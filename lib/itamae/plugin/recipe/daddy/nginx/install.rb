@@ -2,6 +2,7 @@ require 'daddy/itamae'
 
 version = ENV['NGINX_VERSION'] || ItamaePluginRecipeDaddy::NGINX_VERSION
 rtmp_version = ENV['NGINX_RTMP_MODULE_VERSION'] || ItamaePluginRecipeDaddy::NGINX_RTMP_MODULE_VERSION
+app_type = ENV['app_type'] || Daddy.config.app_.type
 
 # install destination
 %w{
@@ -115,10 +116,8 @@ directory '/etc/nginx/conf.d/servers' do
   mode '755'
 end
 
-if Daddy.config.app?
-  if Daddy.config.app.type?
-    include_recipe File.join(File.dirname(File.dirname(__FILE__)), Daddy.config.app.type, 'install.rb')
-  end
+if app_type
+  include_recipe File.join(File.dirname(File.dirname(__FILE__)), app_type, 'install.rb')
 end
 
 unless ENV['DOCKER']

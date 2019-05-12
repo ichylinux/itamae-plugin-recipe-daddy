@@ -1,5 +1,14 @@
-# name of your application
-application: my_app
+# common settings
+application:
+  # name of your application
+  name: my_app
+
+  # environment to run
+  # typically one of production, development, test
+  env: development
+  
+  # root directory
+  root: '.'
 
 # web layer settings
 web:
