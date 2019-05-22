@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    itamae-plugin-recipe-daddy (0.1.13)
+    itamae-plugin-recipe-daddy (0.1.14)
       itamae (~> 1.10, >= 1.10.2)
 
 GEM
@@ -22,7 +22,7 @@ GEM
     rake (12.3.2)
     schash (0.1.2)
     sfl (2.3)
-    specinfra (2.77.1)
+    specinfra (2.77.2)
       net-scp
       net-ssh (>= 2.7)
       net-telnet (= 0.1.1)

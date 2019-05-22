@@ -1,5 +1,5 @@
 module ItamaePluginRecipeDaddy
-  VERSION = '0.1.13'
+  VERSION = '0.1.14'
 
   CHROME_DRIVER_VERSION = [
     CHROME_DRIVER_VERSION_MAJOR = '74',
@@ -43,12 +43,6 @@ module ItamaePluginRecipeDaddy
     PYTHON_VERSION_PATCH = '6'
   ].join('.')
   
-  REDMINE_VERSION = [
-    REDMINE_VERSION_MAJOR = '3',
-    REDMINE_VERSION_MINOR = '4',
-    REDMINE_VERSION_PATCH = '10'
-  ].join('.')
-
   WKHTMLTOPDF_VERSION = [
     WKHTMLTOPDF_VERSION_MAJOR = '0',
     WKHTMLTOPDF_VERSION_MINOR = '12',
