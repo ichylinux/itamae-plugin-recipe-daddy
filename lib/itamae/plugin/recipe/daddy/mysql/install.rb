@@ -46,7 +46,3 @@ when /rhel-7\.(.*?)/
 else
   raise I18n.t('itamae.errors.unsupported_os_version', os_version: os_version)
 end
-
-package 'expect' do
-  user 'root'
-end
