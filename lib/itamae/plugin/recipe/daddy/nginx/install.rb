@@ -2,7 +2,7 @@ require 'daddy/itamae'
 
 version = ENV['NGINX_VERSION'] || ItamaePluginRecipeDaddy::NGINX_VERSION
 rtmp_version = ENV['NGINX_RTMP_MODULE_VERSION'] || ItamaePluginRecipeDaddy::NGINX_RTMP_MODULE_VERSION
-app_type = ENV['app_type'] || Daddy.config.app_.type
+app_type = ENV['APP_TYPE'] || Daddy.config.app.type
 
 # install destination
 %w{

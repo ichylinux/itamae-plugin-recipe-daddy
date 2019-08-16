@@ -1,5 +1,5 @@
 module ItamaePluginRecipeDaddy
-  VERSION = '0.1.16'
+  VERSION = '0.1.17'
 
   CHROME_DRIVER_VERSION = [
     CHROME_DRIVER_VERSION_MAJOR = '76',
@@ -16,7 +16,7 @@ module ItamaePluginRecipeDaddy
   NGINX_VERSION = [
     NGINX_VERSION_MAJOR = '1',
     NGINX_VERSION_MINOR = '16',
-    NGINX_VERSION_PATCH = '0'
+    NGINX_VERSION_PATCH = '1'
   ].join('.')
   
   NGINX_RTMP_MODULE_VERSION = [
