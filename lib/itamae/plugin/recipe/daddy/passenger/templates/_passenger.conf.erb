@@ -14,15 +14,15 @@ server {
 <%- if @letsencrypt -%>
   ssl_certificate /etc/letsencrypt/live/<%= @server_name %>/fullchain.pem;
   ssl_certificate_key /etc/letsencrypt/live/<%= @server_name %>/privkey.pem;
+<%- elsif @selfsigned -%>
+  ssl_certificate /etc/pki/tls/certs/localhost.crt;
+  ssl_certificate_key /etc/pki/tls/private/localhost.key;
+<%- end -%>
 
   location ^~ /.well-known/acme-challenge/ {
     default_type "text/plain";
     root /opt/nginx/shared/letsencrypt;
   }
-<%- elsif @selfsigned -%>
-  ssl_certificate /etc/pki/tls/certs/localhost.crt;
-  ssl_certificate_key /etc/pki/tls/private/localhost.key;
-<%- end -%>
 
   location / {
     root <%= ::File.join(@rails_root, 'public') %>;
