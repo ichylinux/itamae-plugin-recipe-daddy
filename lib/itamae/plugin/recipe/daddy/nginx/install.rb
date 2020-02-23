@@ -36,12 +36,12 @@ execute "download nginx-#{version}" do
   command <<-EOF
     wget https://nginx.org/download/nginx-#{version}.tar.gz
   EOF
-  not_if "echo #{::File.read(::File.join(::File.dirname(__FILE__), "nginx-#{version}_sha256sum.txt")).strip} | sha256sum -c"
+  not_if "test -e /opt/openresty/#{version}/INSTALLED || echo #{::File.read(::File.join(::File.dirname(__FILE__), "nginx-#{version}_sha256sum.txt")).strip} | sha256sum -c"
 end
 
 # module sources
 include_recipe 'modules/nginx-rtmp-module'
-include_recipe 'modules/passenger'
+include_recipe 'passenger'
 
 # build
 execute 'build nginx' do
@@ -56,8 +56,10 @@ execute 'build nginx' do
         --conf-path=/etc/nginx/nginx.conf \
         --pid-path=/run/nginx.pid \
         --with-http_ssl_module \
+        --with-http_realip_module \
+        --with-pcre-jit \
         --add-dynamic-module=/opt/nginx-rtmp-module/v#{rtmp_version} \
-        --add-dynamic-module=$(passenger-config --nginx-addon-dir)
+        --add-dynamic-module=/opt/passenger/current/src/nginx_module
       sudo chown -R #{ENV['USER']}:#{ENV['USER']} ./
       make
       sudo make install
@@ -83,7 +85,6 @@ end
 
 %w{
   /etc/nginx/conf.d
-  /var/run/passenger-instreg
 }.each do |name|
   directory name do
     user 'root'
@@ -91,15 +92,6 @@ end
     group 'root'
     mode '755'
   end
-end
-
-template '/etc/tmpfiles.d/passenger.conf' do
-  user 'root'
-  owner 'root'
-  group 'root'
-  mode '644'
-  variables path: '/var/run/passenger-instreg',
-      owner: 'root', group: 'root', mode: '0755'
 end
 
 template '/etc/nginx/conf.d/default.conf' do
@@ -117,7 +109,7 @@ directory '/etc/nginx/conf.d/servers' do
 end
 
 if app_type
-  include_recipe File.join(File.dirname(File.dirname(__FILE__)), app_type, 'install.rb')
+  include_recipe File.join(File.dirname(File.dirname(__FILE__)), app_type, 'config.rb')
 end
 
 unless ENV['DOCKER']

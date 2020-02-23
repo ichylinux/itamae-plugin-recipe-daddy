@@ -22,6 +22,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency 'itamae', '~> 1.10', '>= 1.10.2'
+  spec.add_dependency 'itamae-plugin-recipe-passenger', '~> 0.1'
   spec.add_dependency 'itamae-plugin-recipe-selenium', '~> 0.1'
 
   spec.add_development_dependency "bundler", "~> 2.0"
