@@ -2,6 +2,10 @@ require 'daddy/itamae'
 
 version = ENV['WKHTMLTOPDF_VERSION'] || ItamaePluginRecipeDaddy::WKHTMLTOPDF_VERSION
 
+directory '/var/daddy/tmp' do
+  user 'root'
+end
+
 case os_version
 when /rhel-6\.(.*?)/
   execute "download wkhtmltox-#{version}" do
