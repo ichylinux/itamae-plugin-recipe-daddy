@@ -23,11 +23,31 @@ when /rhel-6\.(.*?)/
   end
 
 when /rhel-7\.(.*?)/
-  package 'mariadb' do
+  template '/etc/yum.repos.d/mysql-community.repo' do
+    user 'root'
+    owner 'root'
+    group 'root'
+    mode '644'
+  end
+
+  template '/etc/pki/rpm-gpg/RPM-GPG-KEY-mysql' do
+    user 'root'
+    owner 'root'
+    group 'root'
+    mode '644'
+  end
+
+  execute 'yum clean all --enablerepo=mysql57-community' do
+    user 'root'
+    action :nothing
+    subscribes :run, "template[/etc/yum.repos.d/mysql-community.repo]", :immediately
+  end
+
+  package 'mysql-community-server' do
     user 'root'
   end
 
-  package 'mariadb-server' do
+  package 'mysql-community-devel' do
     user 'root'
   end
 
@@ -38,7 +58,7 @@ when /rhel-7\.(.*?)/
     mode '644'
   end
 
-  service 'mariadb' do
+  service 'mysqld' do
     user 'root'
     action [:enable, :start]
   end
