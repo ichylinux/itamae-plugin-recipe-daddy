@@ -36,7 +36,7 @@ execute 'yum clean all' do
   subscribes :run, "template[/etc/yum.repos.d/mysql-community.repo]", :immediately
 end
 
-execute 'yum clean all' do
+execute 'rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022' do
   user 'root'
   action :nothing
   subscribes :run, "template[/etc/pki/rpm-gpg/RPM-GPG-KEY-mysql]", :immediately
