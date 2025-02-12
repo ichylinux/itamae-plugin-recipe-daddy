@@ -35,3 +35,9 @@ execute 'yum clean all' do
   action :nothing
   subscribes :run, "template[/etc/yum.repos.d/mysql-community.repo]", :immediately
 end
+
+execute 'yum clean all' do
+  user 'root'
+  action :nothing
+  subscribes :run, "template[/etc/pki/rpm-gpg/RPM-GPG-KEY-mysql]", :immediately
+end
