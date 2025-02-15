@@ -1,23 +1,13 @@
 require 'daddy/itamae'
 
 case os_version
-when /rhel-7\.(.*?)/
+when /rhel-7\.(.*?)/, /rhel-8\.(.*?)/
   template '/etc/yum.repos.d/mysql-community.repo' do
+    source ::File.join(::File.dirname(__FILE__), "templates/etc/yum.repos.d/mysql-community.#{os_version.split('.').first}.repo.erb")
     user 'root'
     owner 'root'
     group 'root'
     mode '644'
-    variables enable_57: 1,
-              enable_80: 0
-  end
-when /rhel-8\.(.*?)/
-  template '/etc/yum.repos.d/mysql-community.repo' do
-    user 'root'
-    owner 'root'
-    group 'root'
-    mode '644'
-    variables enable_57: 0,
-              enable_80: 1
   end
 else
   raise I18n.t('itamae.errors.unsupported_os_version', os_version: os_version)
@@ -36,8 +26,11 @@ execute 'yum clean all' do
   subscribes :run, "template[/etc/yum.repos.d/mysql-community.repo]", :immediately
 end
 
-execute 'rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022' do
-  user 'root'
-  action :nothing
-  subscribes :run, "template[/etc/pki/rpm-gpg/RPM-GPG-KEY-mysql]", :immediately
+case os_version
+when /rhel-7\.(.*?)/
+  execute 'rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022' do
+    user 'root'
+    action :nothing
+    subscribes :run, "template[/etc/pki/rpm-gpg/RPM-GPG-KEY-mysql]", :immediately
+  end
 end
