@@ -9,13 +9,6 @@ when /rhel-7\.(.*?)/
     group 'root'
     mode '644'
   end
-  
-  template '/etc/pki/rpm-gpg/RPM-GPG-KEY-mysql' do
-    user 'root'
-    owner 'root'
-    group 'root'
-    mode '644'
-  end
 
   execute 'rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022' do
     user 'root'
@@ -31,20 +24,13 @@ when /rhel-8\.(.*?)/
     mode '644'
   end
 
-  template '/etc/pki/rpm-gpg/RPM-GPG-KEY-mysql' do
-    user 'root'
-    owner 'root'
-    group 'root'
-    mode '644'
-  end
-
-  execute 'rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022' do
+  execute 'dnf -y module disable mysql' do
     user 'root'
     action :nothing
-    subscribes :run, "template[/etc/pki/rpm-gpg/RPM-GPG-KEY-mysql]", :immediately
+    subscribes :run, "template[/etc/yum.repos.d/mysql-community.repo]", :immediately
   end
 
-  execute 'dnf -y module disable mysql' do
+  execute 'rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2023' do
     user 'root'
     action :nothing
     subscribes :run, "template[/etc/yum.repos.d/mysql-community.repo]", :immediately
