@@ -32,7 +32,7 @@ when /rhel-8\.(.*?)/
       rm -f wkhtmltox-#{version}.centos8.x86_64.rpm
       wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/#{version.split('-').first}/wkhtmltox-#{version}.centos8.x86_64.rpm
     EOF
-    not_if "sha256sum -c #{::File.join(::File.dirname(__FILE__), "wkhtmltox-#{version}.centos7_sha256sum.txt")}"
+    not_if "sha256sum -c #{::File.join(::File.dirname(__FILE__), "wkhtmltox-#{version}.centos8_sha256sum.txt")}"
   end
   
   execute "install wkhtmltox-#{version}" do
