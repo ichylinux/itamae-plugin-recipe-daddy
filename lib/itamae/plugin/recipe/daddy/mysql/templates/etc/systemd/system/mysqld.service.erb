@@ -1,0 +1,22 @@
+[Unit]
+Description=MySQL server managed by docker
+Requires=docker.service
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/docker run --rm --name mysql \
+  -e MYSQL_ALLOW_EMPTY_PASSWORD=yes \
+  -e TZ=Asia/Tokyo \
+  -v /var/lib/mysql84:/var/lib/mysql \
+  -p 127.0.0.1:3306:3306 \
+  mysql:8.4.7
+ExecStop=/usr/bin/docker stop mysql
+Restart=on-failure
+RestartSec=10s
+TimeoutStartSec=0
+TimeoutStopSec=30
+
+[Install]
+WantedBy=multi-user.target
