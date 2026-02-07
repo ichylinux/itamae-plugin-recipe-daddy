@@ -15,6 +15,12 @@ when /rhel-7\.(.*?)/
     action :nothing
     subscribes :run, "template[/etc/pki/rpm-gpg/RPM-GPG-KEY-mysql]", :immediately
   end
+
+  execute 'yum clean all' do
+    user 'root'
+    action :nothing
+    subscribes :run, "template[/etc/yum.repos.d/mysql-community.repo]", :immediately
+  end
 when /rhel-8\.(.*?)/
   template '/etc/yum.repos.d/mysql-community.repo' do
     source ::File.join(::File.dirname(__FILE__), "templates/etc/yum.repos.d/mysql-community.rhel-8.repo.erb")
@@ -35,12 +41,13 @@ when /rhel-8\.(.*?)/
     action :nothing
     subscribes :run, "template[/etc/yum.repos.d/mysql-community.repo]", :immediately
   end
+
+  execute 'dnf clean all' do
+    user 'root'
+    action :nothing
+    subscribes :run, "template[/etc/yum.repos.d/mysql-community.repo]", :immediately
+  end
 else
   raise I18n.t('itamae.errors.unsupported_os_version', os_version: os_version)
 end
 
-execute 'yum clean all' do
-  user 'root'
-  action :nothing
-  subscribes :run, "template[/etc/yum.repos.d/mysql-community.repo]", :immediately
-end
