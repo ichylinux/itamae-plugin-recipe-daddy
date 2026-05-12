@@ -10,9 +10,10 @@ directory '/var/lib/mysql84' do
 end
 
 case os_version
-when /rhel-7\.(.*?)/, /rhel-8\.(.*?)/
+when /rhel-7\.(.*?)/, /rhel-8\.(.*?)/, /rhel-9\.(.*?)/
   template '/etc/systemd/system/mysqld.service' do
     user 'root'
+    mode '644'
   end
 
   execute 'systemctl daemon-reload' do

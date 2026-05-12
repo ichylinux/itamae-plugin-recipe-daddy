@@ -1,7 +1,7 @@
 include_recipe 'daddy::mysql::common'
 
 case os_version
-when /rhel-7\.(.*?)/, /rhel-8\.(.*?)/
+when /rhel-7\.(.*?)/, /rhel-8\.(.*?)/, /rhel-9\.(.*?)/
   package 'mysql-community-client' do
     user 'root'
   end

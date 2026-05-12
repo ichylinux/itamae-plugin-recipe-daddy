@@ -47,6 +47,32 @@ when /rhel-8\.(.*?)/
     action :nothing
     subscribes :run, "template[/etc/yum.repos.d/mysql-community.repo]", :immediately
   end
+when /rhel-9\.(.*?)/
+  template '/etc/yum.repos.d/mysql-community.repo' do
+    source ::File.join(::File.dirname(__FILE__), "templates/etc/yum.repos.d/mysql-community.rhel-9.repo.erb")
+    user 'root'
+    owner 'root'
+    group 'root'
+    mode '644'
+  end
+
+  execute 'dnf -y module disable mysql' do
+    user 'root'
+    action :nothing
+    subscribes :run, "template[/etc/yum.repos.d/mysql-community.repo]", :immediately
+  end
+
+  execute 'rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2025' do
+    user 'root'
+    action :nothing
+    subscribes :run, "template[/etc/yum.repos.d/mysql-community.repo]", :immediately
+  end
+
+  execute 'dnf clean all' do
+    user 'root'
+    action :nothing
+    subscribes :run, "template[/etc/yum.repos.d/mysql-community.repo]", :immediately
+  end
 else
   raise I18n.t('itamae.errors.unsupported_os_version', os_version: os_version)
 end
