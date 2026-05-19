@@ -16,6 +16,12 @@ when /rhel-7\.(.*?)/, /rhel-8\.(.*?)/, /rhel-9\.(.*?)/
     mode '644'
   end
 
+  execute 'restorecon for mysqld.service unit' do
+    command 'restorecon -v /etc/systemd/system/mysqld.service'
+    user 'root'
+    only_if 'test -x /usr/sbin/restorecon'
+  end
+
   execute 'systemctl daemon-reload' do
     user 'root'
     subscribes :run, 'template[/etc/systemd/system/mysqld.service]', :immediately
