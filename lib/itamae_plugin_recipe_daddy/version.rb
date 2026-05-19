@@ -1,5 +1,5 @@
 module ItamaePluginRecipeDaddy
-  VERSION = '0.2.0'
+  VERSION = '0.2.1'
 
   NGINX_VERSION = [
     NGINX_VERSION_MAJOR = '1',
