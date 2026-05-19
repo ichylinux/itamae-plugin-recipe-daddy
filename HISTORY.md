@@ -1,6 +1,6 @@
 # HISTORY
 
-## v0.2.1 (unreleased)
+## v0.2.1 (2026-05-20)
 
 - Run `restorecon` on `mysqld.service` after template on RHEL to fix SELinux issues
 
