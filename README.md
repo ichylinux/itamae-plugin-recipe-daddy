@@ -1,8 +1,6 @@
-# Itamae::Plugin::Recipe::Daddy
+# itamae-plugin-recipe-daddy
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/itamae/plugin/recipe/daddy`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+An [itamae](https://github.com/itamae-kitchen/itamae) recipe collection for setting up common server components.
 
 ## Installation
 
@@ -20,9 +18,25 @@ Or install it yourself as:
 
     $ gem install itamae-plugin-recipe-daddy
 
-## Usage
+## Recipes
 
-TODO: Write usage instructions here
+| Recipe | Description |
+|--------|-------------|
+| `daddy::mysql::server` | Install and start MySQL server (RHEL 7/8/9) |
+| `daddy::mysql::client` | Install MySQL client and devel packages (RHEL 7/8/9) |
+| `daddy::nginx::install` | Build nginx from source with RTMP module and Passenger |
+| `daddy::bazel::install` | Install Bazel via yum repo |
+| `daddy::memcached::install` | Install and start memcached |
+| `daddy::redis::install` | Install and start Redis |
+| `daddy::opencv::install` | Build and install OpenCV from source |
+| `daddy::python::install` | Build and install Python 3 from source |
+| `daddy::wkhtmltopdf::install` | Install wkhtmltopdf |
+
+## Supported OS
+
+- RHEL 7 / CentOS 7
+- RHEL 8 / AlmaLinux 8
+- RHEL 9 / AlmaLinux 9
 
 ## Development
 
@@ -32,7 +46,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/itamae-plugin-recipe-daddy.
+Bug reports and pull requests are welcome on GitHub at https://github.com/ichylinux/itamae-plugin-recipe-daddy.
 
 ## License
 
